@@ -7,7 +7,7 @@
    ========================================================================== */
 const CONFIG = {
   site: {
-    url: 'https://gocportfolio.github.io/GE2026/'   // your live address (also set in index.html meta tags)
+    url: 'https://gocportfolio.github.io/premiumsample/'   // your live address (also set in index.html meta tags)
   },
 
   couple: {
