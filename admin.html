@@ -31,7 +31,7 @@ td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}t
 .tag{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--blush);color:var(--pink-d);white-space:nowrap}.tag.ok{background:#e9f5df;color:var(--ok)}.tag.no{background:#f1ebe0;color:var(--mut)}
 td .btn{margin-right:6px}.seat{width:112px;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;background:#fff;color:var(--ink)}
 .scan{max-width:520px;margin:auto;text-align:center}video{width:100%;border-radius:14px;background:var(--main);aspect-ratio:1;object-fit:cover}
-.res{margin-top:14px;padding:18px;border-radius:14px;font-size:18px}.res b{display:block;font:600 24px var(--caps)}
+.res{margin-top:14px;padding:18px;border-radius:14px;font-size:18px;text-align:center}.res svg{width:76px;height:76px;display:block;margin:0 auto 10px;animation:pop .35s ease-out}@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){.res svg{animation:none}}.res b{display:block;font:600 24px var(--caps)}
 .res.ok{background:#e9f5df;color:#2a6a0e}.res.already{background:#fff3df;color:#8a5a14}.res.bad{background:#f8e4df;color:#8a3324}
 .row{display:flex;gap:8px;margin-top:12px}.row input{flex:1;border:1px solid var(--line);border-radius:10px;padding:11px;text-transform:uppercase;letter-spacing:.08em}
 #login{position:fixed;inset:0;background:var(--blush);display:grid;place-items:center;z-index:9}#login form{width:min(92vw,360px);text-align:center}
@@ -62,6 +62,7 @@ td .btn{margin-right:6px}.seat{width:112px;border:1px solid var(--line);border-r
 
 <section id="v-scan" hidden><div class="card scan"><h2>Check in a guest</h2><p style="color:var(--mut)">Point the camera at the guest's QR code, or type the code.</p>
 <video id="vid" playsinline muted hidden></video>
+<p id="camst" role="status" aria-live="polite" style="color:var(--mut);margin:10px 0 0"></p>
 <div class="row"><button class="btn fill" id="cam" style="flex:none">Start camera</button><input id="code" placeholder="GE-XXXXXXXX" aria-label="Guest code"><button class="btn" id="go">Check in</button></div>
 <div id="res" role="status" aria-live="assertive"></div></div></section>
 </main></div>
@@ -112,19 +113,28 @@ $('#tb').onclick=async e=>{const r=e.target.dataset.r,c=e.target.dataset.c;
   const x=await api('remind',{row:r});if(x.ok){g.reminded=x.at;render();}}
  if(c){const x=await api('checkin',{code:c});if(x.status==='checked'||x.status==='already'){await load();}else alert('Could not check in this guest.');}};
 
+const ico=(c,d)=>`<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="${c}"/><path d="${d}" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICON={ok:ico('#2f9a12','M14 27l8 8 16-17'),already:ico('#d58a1f','M17 17l18 18M35 17L17 35'),bad:ico('#c0392b','M17 17l18 18M35 17L17 35')};
 function result(x){const el=$('#res');const m={checked:['ok','Welcome'],already:['already','Already checked in'],notfound:['bad','Code not found']}[x.status]||['bad','Something went wrong'];
- el.className='res '+m[0];el.innerHTML=`<b>${m[1]}</b>`+(x.name?`${esc(x.name)} · admits ${esc(x.guests)}`+(x.status==='already'?`<br>First scanned ${new Date(x.at).toLocaleTimeString('en-GB',{timeStyle:'short'})}`:''):'Check the code or search the guest by name.')+(x.name?`<br><strong style="font:500 26px var(--caps)">${x.seat?'Seat: '+esc(x.seat):'No seat assigned yet'}</strong>`:'');navigator.vibrate&&navigator.vibrate(x.status==='checked'?80:[60,60,60]);}
+ el.className='res '+m[0];el.innerHTML=ICON[m[0]]+`<b>${m[1]}</b>`+(x.name?`${esc(x.name)} · admits ${esc(x.guests)}`+(x.status==='already'?`<br>First scanned ${new Date(x.at).toLocaleTimeString('en-GB',{timeStyle:'short'})}`:''):'Check the code or search the guest by name.')+(x.name?`<br><strong style="font:500 26px var(--caps)">${x.seat?'Seat: '+esc(x.seat):'No seat assigned yet'}</strong>`:'');navigator.vibrate&&navigator.vibrate(x.status==='checked'?80:[60,60,60]);}
 async function submit(code){if(busy)return;busy=true;try{result(await api('checkin',{code}));if(role==='admin')load();}catch(e){result({status:'error'});}busy=false;}
 $('#go').onclick=()=>{const c=$('#code').value.trim();if(c)submit(c);$('#code').value='';};$('#code').onkeydown=e=>{if(e.key==='Enter')$('#go').click();};
-function stopCam(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('#vid').hidden=true;$('#cam').textContent='Start camera';}
-$('#cam').onclick=async()=>{if(stream)return stopCam();
- try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});}catch(e){return result({status:'error'});}
- const v=$('#vid');v.srcObject=stream;v.hidden=false;await v.play();$('#cam').textContent='Stop camera';
- let det=window.BarcodeDetector?new BarcodeDetector({formats:['qr_code']}):null;
- if(!det){await new Promise(r=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';s.onload=r;document.head.appendChild(s);});}
+function stopCam(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('#vid').hidden=true;$('#cam').textContent='Start camera';$('#camst').textContent='';}
+const loadJsQR=()=>window.jsQR?Promise.resolve():new Promise((ok,no)=>{const u=['https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js','https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js'];let i=0;
+ (function next(){if(i>=u.length)return no();const s=document.createElement('script');s.src=u[i++];s.onload=()=>window.jsQR?ok():next();s.onerror=next;document.head.appendChild(s);})();});
+$('#cam').onclick=async()=>{if(stream)return stopCam();const st=$('#camst');
+ if(!navigator.mediaDevices?.getUserMedia||!window.isSecureContext){st.textContent='The camera only works on the secure https address of this page, not on a file opened from your computer. You can still type the code below.';return;}
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});}
+ catch(e){st.textContent=e.name==='NotAllowedError'?'The camera is blocked. Click the camera icon in the address bar, allow access, then press Start camera again.':e.name==='NotFoundError'?'No camera was found on this device. Type the code below instead.':'The camera could not start ('+e.name+'). Close any other app using the camera and try again.';return;}
+ const v=$('#vid');v.srcObject=stream;v.hidden=false;try{await v.play();}catch(e){}$('#cam').textContent='Stop camera';
+ let det=null;try{if(window.BarcodeDetector&&(await BarcodeDetector.getSupportedFormats()).includes('qr_code'))det=new BarcodeDetector({formats:['qr_code']});}catch(e){}
+ if(!det){st.textContent='Loading the scanner…';try{await loadJsQR();}catch(e){stopCam();st.textContent='The scanner could not load. Check the internet connection or an ad blocker, or type the code below instead.';return;}}
+ st.textContent='Looking for a QR code. Hold the pass steady, about 20 to 30 cm from the camera, with the phone screen brightness turned up.';
  const cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});let last='',lt=0;
  (async function loop(){if(!stream)return;let t='';
-  try{if(det){const r=await det.detect(v);t=r[0]?.rawValue||'';}else if(v.videoWidth){cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);t=jsQR(cx.getImageData(0,0,cv.width,cv.height).data,cv.width,cv.height)?.data||'';}}catch(e){}
+  try{if(det){const r=await det.detect(v);t=r[0]?.rawValue||'';}
+   else if(v.videoWidth){cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);t=jsQR(cx.getImageData(0,0,cv.width,cv.height).data,cv.width,cv.height)?.data||'';}}
+  catch(e){if(det){det=null;try{await loadJsQR();}catch(x){stopCam();st.textContent='The scanner could not load. Type the code below instead.';return;}}}
   if(t&&(t!==last||Date.now()-lt>4000)){last=t;lt=Date.now();await submit(t);}
   setTimeout(loop,250);})();};
 if(key)login(key);
