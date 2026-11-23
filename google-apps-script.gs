@@ -9,13 +9,13 @@
  * in the sheet > "Check in a guest" and scan or type the code.
  */
 var SHEET_NAME = 'RSVPs';
-var HEADERS = ['Received', 'Name', 'Phone', 'Attending', 'Guests', 'Message', 'Code', 'Checked in', 'Reminded'];
-var COL_CODE = 7, COL_CHECKED = 8, COL_REMINDED = 9;
+var HEADERS = ['Received', 'Name', 'Phone', 'Attending', 'Guests', 'Message', 'Code', 'Checked in', 'Reminded', 'Seat'];
+var COL_CODE = 7, COL_CHECKED = 8, COL_REMINDED = 9, COL_SEAT = 10;
 
 // Passcodes for the guest desk (admin.html). CHANGE BOTH before you deploy.
 // ADMIN sees the whole dashboard. USHER can only check guests in.
-var ADMIN_KEY = 'GOC';
-var USHER_KEY = 'GOC123';
+var ADMIN_KEY = 'CHANGE-ME-ADMIN';
+var USHER_KEY = 'CHANGE-ME-USHER';
 var CODE_RE = /^GE-[A-HJ-NP-Z2-9]{8}$/;
 
 // Stops spreadsheet formulas such as =HYPERLINK(...) being run from a guest's text.
@@ -80,6 +80,7 @@ function doPost(e) {
       safe_(data.message),
       code,
       '',
+      '',
       ''
     ]]);
     return ok_('saved');
@@ -114,11 +115,11 @@ function doGet(e) {
       var row = CODE_RE.test(code) ? findCodeRow_(sheet, code) : 0;
       if (!row) return json_({ ok: true, status: 'notfound' });
       var r = sheet.getRange(row, 1, 1, HEADERS.length).getValues()[0];
-      if (r[COL_CHECKED - 1]) return json_({ ok: true, status: 'already', name: r[1], guests: r[4], at: new Date(r[COL_CHECKED - 1]).toISOString() });
+      if (r[COL_CHECKED - 1]) return json_({ ok: true, status: 'already', name: r[1], guests: r[4], seat: r[COL_SEAT - 1], at: new Date(r[COL_CHECKED - 1]).toISOString() });
       var now = new Date();
       sheet.getRange(row, COL_CHECKED).setValue(now).setNumberFormat('d MMM yyyy, h:mm a');
       sheet.getRange(row, 1, 1, HEADERS.length).setBackground('#d9ead3');
-      return json_({ ok: true, status: 'checked', name: r[1], guests: r[4], at: now.toISOString() });
+      return json_({ ok: true, status: 'checked', name: r[1], guests: r[4], seat: r[COL_SEAT - 1], at: now.toISOString() });
     }
     if (role !== 'admin') return json_({ ok: false, error: 'auth' });
     if (p.action === 'list') {
@@ -126,7 +127,7 @@ function doGet(e) {
       var vals = last < 2 ? [] : sheet.getRange(2, 1, last - 1, HEADERS.length).getValues();
       var iso = function (d) { return d ? new Date(d).toISOString() : ''; };
       return json_({ ok: true, rows: vals.map(function (v, i) {
-        return { id: i + 2, received: iso(v[0]), name: v[1], phone: String(v[2]), attending: v[3], guests: v[4], message: v[5], code: v[6], checkedIn: iso(v[7]), reminded: iso(v[8]) };
+        return { id: i + 2, received: iso(v[0]), name: v[1], phone: String(v[2]), attending: v[3], guests: v[4], message: v[5], code: v[6], checkedIn: iso(v[7]), reminded: iso(v[8]), seat: v[9] };
       }) });
     }
     if (p.action === 'remind') {
@@ -135,6 +136,13 @@ function doGet(e) {
       var t = new Date();
       sheet.getRange(n, COL_REMINDED).setValue(t).setNumberFormat('d MMM yyyy, h:mm a');
       return json_({ ok: true, at: t.toISOString() });
+    }
+    if (p.action === 'seat') {
+      var m = Number(p.row);
+      if (!(m >= 2 && m <= sheet.getLastRow())) return json_({ ok: false, error: 'row' });
+      var seat = safe_(p.seat).slice(0, 30);
+      sheet.getRange(m, COL_SEAT).setNumberFormat('@').setValue(seat);
+      return json_({ ok: true, seat: seat });
     }
     return json_({ ok: false, error: 'action' });
   } catch (err) {
@@ -164,7 +172,7 @@ function checkIn() {
   if (!row) { ui.alert('NOT FOUND', 'No RSVP has the code "' + code + '". Check the code or look the guest up by name.', ui.ButtonSet.OK); return; }
 
   var r = sheet.getRange(row, 1, 1, HEADERS.length).getValues()[0];
-  var who = r[1] + ' (admits ' + r[4] + (r[4] === 1 ? ' guest)' : ' guests)');
+  var who = r[1] + ' (admits ' + r[4] + (r[4] === 1 ? ' guest)' : ' guests)') + (r[COL_SEAT - 1] ? '\nSeat: ' + r[COL_SEAT - 1] : '\nNo seat assigned yet');
   if (r[COL_CHECKED - 1]) {
     ui.alert('ALREADY CHECKED IN', who + '\nwas checked in at ' + Utilities.formatDate(new Date(r[COL_CHECKED - 1]), Session.getScriptTimeZone(), 'd MMM yyyy, h:mm a') + '.', ui.ButtonSet.OK);
     return;

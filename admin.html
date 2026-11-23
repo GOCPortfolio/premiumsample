@@ -1,48 +1,49 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Guest desk · Ene & Oche</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--pink:#f0a2b6;--pink-d:#d9708c;--blush:#fff4f6;--ink:#2b2226;--mut:#8b7d83;--line:#f1e4e8;--ok:#4f9d75;--warn:#e0a24a;--bad:#c8505f}
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#fff9fa,#fff0f3)}
-h1,h2,.big{font-family:'Playfair Display',Georgia,serif;font-weight:600;margin:0}
+:root{--pink:#c9a24b;--pink-d:#8d6a22;--blush:#fbf6ec;--ink:#3a2a1e;--mut:#6f5a48;--line:#eadfc8;--ok:#2f7d0f;--warn:#e0a24a;--bad:#a8402e;--main:#3b2415;--coffee:#6b4226;--green:#4cbb17;
+  --serif:'Cormorant Garamond',Georgia,serif;--caps:'Cinzel',Georgia,serif;--script:'Great Vibes',cursive;--sans:'Montserrat',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;font:14px/1.55 var(--sans);color:var(--ink);background:linear-gradient(160deg,#fbf6ec,#f1e6cf)}
+h1,h2,.big{font-family:var(--caps);font-weight:500;margin:0;letter-spacing:.06em}#nm{font:400 1.45em var(--script);color:var(--pink-d);letter-spacing:0}
 button,input,select{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
 .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
-nav{background:#fff;border-right:1px solid var(--line);padding:22px 14px}
-.logo{font:600 20px 'Playfair Display',serif;padding:0 8px 20px}.logo small{display:block;font:400 12px Inter;color:var(--mut)}
-nav button{display:block;width:100%;text-align:left;border:0;background:none;padding:11px 12px;border-radius:10px;color:var(--mut);font-weight:500;margin-bottom:4px}
-nav button.on{background:var(--blush);color:var(--ink)}
+nav{background:var(--main);padding:22px 14px}
+.logo{font:400 32px var(--script);color:#f1dc9a;padding:0 8px 22px;line-height:1.1}.logo small{display:block;font:400 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#cdb98a;margin-top:4px}
+nav button{display:block;width:100%;text-align:left;border:0;background:none;padding:11px 12px;border-radius:10px;color:#d9c9a8;font-weight:500;margin-bottom:4px}
+nav button.on{background:rgba(201,162,75,.2);color:#f1dc9a}
 main{padding:26px clamp(16px,3vw,36px)}
 header{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
 header h1{font-size:28px}header p{margin:2px 0 0;color:var(--mut)}header b{color:var(--pink-d)}
 .btn{border:1px solid var(--pink);background:#fff;color:var(--pink-d);padding:9px 18px;border-radius:999px;font-weight:500}
-.btn.fill{background:var(--pink);color:#fff;border-color:var(--pink)}.btn.sm{padding:5px 12px;font-size:13px}.btn:disabled{opacity:.5}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(4,1fr);margin-bottom:16px}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 22px rgba(217,112,140,.1)}
+.btn.fill{background:linear-gradient(135deg,#e3c46f,#c9a24b);color:var(--main);border-color:var(--pink);font-weight:600}.btn.sm{padding:5px 12px;font-size:13px}.btn:disabled{opacity:.5}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:16px}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 22px rgba(59,36,21,.1)}
 .stat span{color:var(--mut);font-size:13px}.stat .big{font-size:34px;display:block;margin-top:2px}.stat i{font-style:normal;font-size:12px;color:var(--mut)}
 .two{display:grid;gap:16px;grid-template-columns:1.1fr 1fr;margin-bottom:16px}
 .cd{display:flex;gap:10px;margin-top:12px}.cd div{flex:1;background:var(--blush);border-radius:12px;padding:12px 4px;text-align:center}
-.cd b{display:block;font:600 30px 'Playfair Display',serif}.cd span{font-size:12px;color:var(--mut)}
+.cd b{display:block;font:600 30px var(--caps)}.cd span{font-size:12px;color:var(--mut)}
 .bar{height:10px;background:var(--blush);border-radius:9px;overflow:hidden;margin:12px 0 6px}.bar i{display:block;height:100%;background:var(--pink);width:0;transition:width .5s}
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.tools input,.tools select{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff}.tools input{flex:1;min-width:160px}
 .tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:640px}th{text-align:left;font-size:12px;color:var(--mut);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line)}
 td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}td small{color:var(--mut);display:block}
-.tag{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--blush);color:var(--pink-d);white-space:nowrap}.tag.ok{background:#e8f5ee;color:var(--ok)}.tag.no{background:#f4eef0;color:var(--mut)}
-td .btn{margin-right:6px}
-.scan{max-width:520px;margin:auto;text-align:center}video{width:100%;border-radius:14px;background:#2b2226;aspect-ratio:1;object-fit:cover}
-.res{margin-top:14px;padding:18px;border-radius:14px;font-size:18px}.res b{display:block;font:600 24px 'Playfair Display',serif}
-.res.ok{background:#e8f5ee;color:#2f6e4d}.res.already{background:#fff3df;color:#8a5a14}.res.bad{background:#fbe6e9;color:#9a3342}
+.tag{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--blush);color:var(--pink-d);white-space:nowrap}.tag.ok{background:#e9f5df;color:var(--ok)}.tag.no{background:#f1ebe0;color:var(--mut)}
+td .btn{margin-right:6px}.seat{width:112px;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;background:#fff;color:var(--ink)}
+.scan{max-width:520px;margin:auto;text-align:center}video{width:100%;border-radius:14px;background:var(--main);aspect-ratio:1;object-fit:cover}
+.res{margin-top:14px;padding:18px;border-radius:14px;font-size:18px}.res b{display:block;font:600 24px var(--caps)}
+.res.ok{background:#e9f5df;color:#2a6a0e}.res.already{background:#fff3df;color:#8a5a14}.res.bad{background:#f8e4df;color:#8a3324}
 .row{display:flex;gap:8px;margin-top:12px}.row input{flex:1;border:1px solid var(--line);border-radius:10px;padding:11px;text-transform:uppercase;letter-spacing:.08em}
 #login{position:fixed;inset:0;background:var(--blush);display:grid;place-items:center;z-index:9}#login form{width:min(92vw,360px);text-align:center}
 #login h1{font-size:30px;margin-bottom:6px}#login input{width:100%;margin:14px 0 10px;padding:12px;border:1px solid var(--pink);border-radius:12px}
 .err{color:var(--bad);min-height:20px;margin:6px 0}
-@media(max-width:860px){.app{display:block}nav{display:flex;gap:4px;padding:10px;border:0;border-bottom:1px solid var(--line);overflow-x:auto}.logo{display:none}nav button{width:auto;white-space:nowrap;margin:0}.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
+@media(max-width:860px){.app{display:block}nav{display:flex;gap:4px;padding:10px;overflow-x:auto}.logo{display:none}nav button{width:auto;white-space:nowrap;margin:0}.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
 :focus-visible{outline:2px solid var(--pink-d);outline-offset:2px}
 </style></head><body>
 <div id="login"><form id="lf"><h1>Guest desk</h1><div style="color:var(--mut)">Ene &amp; Oche · enter your passcode</div>
 <input id="key" type="password" autocomplete="current-password" aria-label="Passcode" required><div class="err" id="lerr" role="alert"></div><button class="btn fill" style="width:100%">Open</button></form></div>
 <div class="app" id="app" hidden>
-<nav><div class="logo">Ever After<small>Guest desk</small></div>
+<nav><div class="logo">Ene &amp; Oche<small>Guest desk</small></div>
 <button data-v="home" class="on">Dashboard</button><button data-v="guests">Guests</button><button data-v="scan">Check-in</button></nav>
 <main>
 <header><div><h1>Welcome back, <span id="nm"></span></h1><p>Your big day is <b id="days">…</b> days away</p></div>
@@ -56,8 +57,8 @@ td .btn{margin-right:6px}
 </div></section>
 
 <section id="v-guests" hidden><div class="card">
-<div class="tools"><input id="q" placeholder="Search name, phone or code" aria-label="Search guests"><select id="f" aria-label="Filter"><option value="all">All responses</option><option value="yes">Attending</option><option value="no">Declined</option><option value="in">Checked in</option><option value="out">Not arrived yet</option><option value="rem">Not reminded</option></select></div>
-<div class="tw"><table><thead><tr><th>Guest</th><th>Party</th><th>Status</th><th>Entry code</th><th>Actions</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
+<div class="tools"><input id="q" placeholder="Search name, phone or code" aria-label="Search guests"><select id="f" aria-label="Filter"><option value="all">All responses</option><option value="yes">Attending</option><option value="no">Declined</option><option value="in">Checked in</option><option value="out">Not arrived yet</option><option value="noseat">No seat yet</option><option value="rem">Not reminded</option></select></div>
+<div class="tw"><table><thead><tr><th>Guest</th><th>Party</th><th>Status</th><th>Seat</th><th>Entry code</th><th>Actions</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
 
 <section id="v-scan" hidden><div class="card scan"><h2>Check in a guest</h2><p style="color:var(--mut)">Point the camera at the guest's QR code, or type the code.</p>
 <video id="vid" playsinline muted hidden></video>
@@ -65,8 +66,8 @@ td .btn{margin-right:6px}
 <div id="res" role="status" aria-live="assertive"></div></div></section>
 </main></div>
 <script>
-const CFG={names:'Ene & Oche',endpoint:'https://script.google.com/macros/s/AKfycbzQh8qhebkDvs91L0NLTnjCUGn0Slw_s5b8lajfSkPch6_N6OleUHJ47LNYH8kLEwlL/exec',
- startISO:'2026-12-30T10:00:00+01:00',venue:'Otukpo, Benue State',site:'https://gocportfolio.github.io/premiumsample/',countryCode:'234'};
+const CFG={names:'Ene & Oche',endpoint:'https://script.google.com/macros/s/AKfycbxSm82ZApN8GTyOte-MWVQM9lj0F3JAYaCACxx2RR4JkTx-m-qekFY2UowapGgsQn8A/exec',
+ startISO:'2026-12-30T10:00:00+01:00',venue:'Otukpo, Benue State',site:'https://gocportfolio.github.io/GE2026/',countryCode:'234'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let key=sessionStorage.getItem('gk')||'',role='',guests=[],stream=null,busy=false;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -84,32 +85,35 @@ $$('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));$$('[data-go]').for
 setInterval(tick,1000);function tick(){const d=Math.max(0,START-Date.now()),s=Math.floor(d/1e3);
  $('#days').textContent=Math.ceil(d/864e5);$('#cd').innerHTML=[['Days',s/86400],['Hours',s%86400/3600],['Minutes',s%3600/60],['Seconds',s%60]].map(([l,n])=>`<div><b>${String(Math.floor(n)).padStart(2,'0')}</b><span>${l}</span></div>`).join('');}tick();
 
-async function load(){try{const r=await api('list');if(!r.ok)throw 0;guests=r.rows;render();}catch(e){$('#tb').innerHTML='<tr><td colspan=5>Could not load the guest list. Check your connection and press Refresh.</td></tr>';}}
+async function load(){try{const r=await api('list');if(!r.ok)throw 0;guests=r.rows;render();}catch(e){$('#tb').innerHTML='<tr><td colspan=6>Could not load the guest list. Check your connection and press Refresh.</td></tr>';}}
 $('#refresh').onclick=load;
 function stats(){const yes=guests.filter(g=>g.attending==='Joyfully accept'),sum=a=>a.reduce((n,g)=>n+(+g.guests||0),0),inn=yes.filter(g=>g.checkedIn);
- return{yes,exp:sum(yes),no:guests.length-yes.length,inn,arr:sum(inn),rem:yes.filter(g=>g.reminded).length};}
-function render(){const s=stats();
- $('#stats').innerHTML=[['Responses',guests.length,'RSVPs received'],['Attending',s.exp,`guests from ${s.yes.length} RSVPs`],['Declined',s.no,'RSVPs'],['Reminded',s.rem,`of ${s.yes.length} attending`]].map(([a,b,c])=>`<div class="card stat"><span>${a}</span><b class="big">${b}</b><i>${c}</i></div>`).join('');
- $('#arr').textContent=`${s.arr} of ${s.exp} guests`;$('#arrbar').style.width=(s.exp?Math.min(100,s.arr/s.exp*100):0)+'%';$('#arrsub').textContent=`${s.inn.length} of ${s.yes.length} RSVPs checked in`;rows();}
+ return{yes,exp:sum(yes),no:guests.length-yes.length,inn,arr:sum(inn),rem:yes.filter(g=>g.reminded).length,seated:yes.filter(g=>g.seat).length};}
+function head(){const s=stats();
+ $('#stats').innerHTML=[['Responses',guests.length,'RSVPs received'],['Attending',s.exp,`guests from ${s.yes.length} RSVPs`],['Declined',s.no,'RSVPs'],['Seated',s.seated,`of ${s.yes.length} attending RSVPs`],['Reminded',s.rem,`of ${s.yes.length} attending`]].map(([a,b,c])=>`<div class="card stat"><span>${a}</span><b class="big">${b}</b><i>${c}</i></div>`).join('');
+ $('#arr').textContent=`${s.arr} of ${s.exp} guests`;$('#arrbar').style.width=(s.exp?Math.min(100,s.arr/s.exp*100):0)+'%';$('#arrsub').textContent=`${s.inn.length} of ${s.yes.length} RSVPs checked in`;}
+function render(){head();rows();}
 const phone=p=>{p=String(p).replace(/\D/g,'');return p.startsWith('0')?CFG.countryCode+p.slice(1):p;};
 function rows(){const q=$('#q').value.toLowerCase(),f=$('#f').value;
  const list=guests.filter(g=>{const y=g.attending==='Joyfully accept';
-  if(q&&!(g.name+g.phone+g.code).toLowerCase().includes(q))return false;
-  return f==='all'||(f==='yes'&&y)||(f==='no'&&!y)||(f==='in'&&g.checkedIn)||(f==='out'&&y&&!g.checkedIn)||(f==='rem'&&y&&!g.reminded);}).reverse();
+  if(q&&!(g.name+g.phone+g.code+g.seat).toLowerCase().includes(q))return false;
+  return f==='all'||(f==='yes'&&y)||(f==='no'&&!y)||(f==='in'&&g.checkedIn)||(f==='out'&&y&&!g.checkedIn)||(f==='rem'&&y&&!g.reminded)||(f==='noseat'&&y&&!g.seat);}).reverse();
  $('#tb').innerHTML=list.map(g=>{const y=g.attending==='Joyfully accept';
   return `<tr><td><b>${esc(g.name)}</b><small>${esc(g.phone)}</small></td><td>${y?esc(g.guests):'–'}</td>
   <td><span class="tag ${g.checkedIn?'ok':y?'':'no'}">${g.checkedIn?'Checked in':y?'Attending':'Declined'}</span>${g.reminded?'<small>Reminded</small>':''}</td>
-  <td>${esc(g.code)||'–'}</td><td>${y?`<button class="btn sm" data-r="${g.id}">${g.reminded?'Remind again':'Send reminder'}</button>${g.checkedIn?'':`<button class="btn sm" data-c="${esc(g.code)}">Check in</button>`}`:''}</td></tr>`;}).join('')||'<tr><td colspan=5>No guests match.</td></tr>';}
+  <td>${y?`<input class="seat" data-s="${g.id}" value="${esc(g.seat)}" placeholder="e.g. Table 4" maxlength="30" aria-label="Seat for ${esc(g.name)}">`:'–'}</td><td>${esc(g.code)||'–'}</td><td>${y?`<button class="btn sm" data-r="${g.id}">${g.reminded?'Remind again':'Send reminder'}</button>${g.checkedIn?'':`<button class="btn sm" data-c="${esc(g.code)}">Check in</button>`}`:''}</td></tr>`;}).join('')||'<tr><td colspan=6>No guests match.</td></tr>';}
 $('#q').oninput=rows;$('#f').onchange=rows;
+$('#tb').onchange=async e=>{const id=e.target.dataset.s;if(!id)return;const g=guests.find(x=>x.id==id),v=e.target.value.trim();e.target.disabled=true;
+ try{const x=await api('seat',{row:id,seat:v});if(x.ok){g.seat=x.seat;e.target.value=x.seat;head();}else throw 0;}catch(err){e.target.value=g.seat||'';alert('Could not save the seat. Try again.');}e.target.disabled=false;};
 $('#tb').onclick=async e=>{const r=e.target.dataset.r,c=e.target.dataset.c;
  if(r){const g=guests.find(x=>x.id==r),first=g.name.split(' ')[0],link=CFG.site+'?guest='+encodeURIComponent(g.name);
-  const t=`Hello ${first}! A warm reminder of the wedding of ${CFG.names} on ${START.toLocaleDateString('en-GB',{dateStyle:'full',timeZone:'Africa/Lagos'})} at ${START.toLocaleTimeString('en-GB',{timeStyle:'short',timeZone:'Africa/Lagos'})}, ${CFG.venue}. Please bring your entry pass (QR code) from the invitation: ${link}  Your code: ${g.code}. We cannot wait to celebrate with you!`;
+  const t=`Hello ${first}! A warm reminder of the wedding of ${CFG.names} on ${START.toLocaleDateString('en-GB',{dateStyle:'full',timeZone:'Africa/Lagos'})} at ${START.toLocaleTimeString('en-GB',{timeStyle:'short',timeZone:'Africa/Lagos'})}, ${CFG.venue}. Please bring your entry pass (QR code) from the invitation: ${link}  Your code: ${g.code}.${g.seat?` Your seat: ${g.seat}.`:''} We cannot wait to celebrate with you!`;
   window.open(`https://wa.me/${phone(g.phone)}?text=${encodeURIComponent(t)}`,'_blank','noopener');
   const x=await api('remind',{row:r});if(x.ok){g.reminded=x.at;render();}}
  if(c){const x=await api('checkin',{code:c});if(x.status==='checked'||x.status==='already'){await load();}else alert('Could not check in this guest.');}};
 
 function result(x){const el=$('#res');const m={checked:['ok','Welcome'],already:['already','Already checked in'],notfound:['bad','Code not found']}[x.status]||['bad','Something went wrong'];
- el.className='res '+m[0];el.innerHTML=`<b>${m[1]}</b>`+(x.name?`${esc(x.name)} · admits ${esc(x.guests)}`+(x.status==='already'?`<br>First scanned ${new Date(x.at).toLocaleTimeString('en-GB',{timeStyle:'short'})}`:''):'Check the code or search the guest by name.');navigator.vibrate&&navigator.vibrate(x.status==='checked'?80:[60,60,60]);}
+ el.className='res '+m[0];el.innerHTML=`<b>${m[1]}</b>`+(x.name?`${esc(x.name)} · admits ${esc(x.guests)}`+(x.status==='already'?`<br>First scanned ${new Date(x.at).toLocaleTimeString('en-GB',{timeStyle:'short'})}`:''):'Check the code or search the guest by name.')+(x.name?`<br><strong style="font:500 26px var(--caps)">${x.seat?'Seat: '+esc(x.seat):'No seat assigned yet'}</strong>`:'');navigator.vibrate&&navigator.vibrate(x.status==='checked'?80:[60,60,60]);}
 async function submit(code){if(busy)return;busy=true;try{result(await api('checkin',{code}));if(role==='admin')load();}catch(e){result({status:'error'});}busy=false;}
 $('#go').onclick=()=>{const c=$('#code').value.trim();if(c)submit(c);$('#code').value='';};$('#code').onkeydown=e=>{if(e.key==='Enter')$('#go').click();};
 function stopCam(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('#vid').hidden=true;$('#cam').textContent='Start camera';}

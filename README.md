@@ -63,7 +63,8 @@ Phone camera apps will read the QR code and show the code text, which you can th
 Open `https://YOURADDRESS/admin.html` (it is hidden from search engines). It shows the wedding countdown, RSVP and guest totals, arrivals, a searchable guest list, a **Send reminder** button per guest (opens WhatsApp with the message ready; the sheet logs it in the **Reminded** column) and a **Check-in** page that scans entry-pass QR codes with the phone camera or takes a typed code.
 1. In `google-apps-script.gs` set `ADMIN_KEY` (couple / planner) and `USHER_KEY` (ushers: check-in only, no guest list). Redeploy as a new version.
 2. The names, date, venue, site address and endpoint are in the `CFG` box near the bottom of `admin.html`. Nigerian numbers starting with 0 are sent as +234 (`countryCode`).
-3. Give ushers the page address and the usher passcode only.
+3. **Seats:** in the Guests tab, type a seat or table for each attending guest (for example `Table 4` or `Table 4, seats 1 to 3`). It saves when you leave the box, goes into the **Seat** column of the sheet, appears in the reminder message, and is shown to ushers in big letters when they scan the guest's pass. Use the **No seat yet** filter to see who is left.
+4. Give ushers the page address and the usher passcode only.
 
 ## 5. Personalised guest links
 Add `?guest=Name` to the address and the envelope and card greet that person, and the RSVP name is pre-filled.

@@ -7,7 +7,7 @@
    ========================================================================== */
 const CONFIG = {
   site: {
-    url: 'https://gocportfolio.github.io/premiumsample/'   // your live address (also set in index.html meta tags)
+    url: 'https://gocportfolio.github.io/GE2026/'   // your live address (also set in index.html meta tags)
   },
 
   couple: {
@@ -135,7 +135,7 @@ const CONFIG = {
   ],
 
   rsvp: {
-    endpoint: 'https://script.google.com/macros/s/AKfycbzQh8qhebkDvs91L0NLTnjCUGn0Slw_s5b8lajfSkPch6_N6OleUHJ47LNYH8kLEwlL/exec',
+    endpoint: 'https://script.google.com/macros/s/AKfycbxSm82ZApN8GTyOte-MWVQM9lj0F3JAYaCACxx2RR4JkTx-m-qekFY2UowapGgsQn8A/exec',
     maxGuests: 10,
     passNote: 'Please save this pass and show it at the entrance on the day.'   // shown under the QR code
   },
