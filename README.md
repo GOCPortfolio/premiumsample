@@ -21,7 +21,7 @@ Open `script.js`. Everything between `const CONFIG = {` and the line `APP CODE` 
 1. **Father of the Day**: `father.names` is empty, so the section is hidden. Add names, e.g. `names: ['Mr John Doe'], role: 'Chairman, Doe Ltd'`.
 2. **Parking answer** in `faq` (marked `TO CONFIRM`): currently says details will be shared soon.
 3. **RSVP link** `rsvp.endpoint` (see section 4).
-4. **Hosting address**: set to `https://gocportfolio.github.io/GE2026/`. If your address is different, change it in the 4 places listed in section 6.
+4. **Hosting address**: set to `https://gocportfolio.github.io/premiumsample/`. If your address is different, change it in the 4 places listed in section 6.
 5. **Music**: the file in `assets/music.mp3` is the song you supplied: "Make You Feel My Love" (Anendlessocean version). See section 7 about the rights to use it.
 
 ### Note on names and parents
@@ -68,7 +68,7 @@ Open `https://YOURADDRESS/admin.html` (it is hidden from search engines). It sho
 
 ## 5. Personalised guest links
 Add `?guest=Name` to the address and the envelope and card greet that person, and the RSVP name is pre-filled.
-Example: `https://gocportfolio.github.io/GE2026/?guest=Aunty%20Joy`
+Example: `https://gocportfolio.github.io/premiumsample/?guest=Aunty%20Joy`
 Spaces become `%20` and `&` becomes `%26`.
 
 ## 6. Link preview (WhatsApp, Facebook, Twitter)
@@ -85,7 +85,7 @@ The address appears in 4 places in `index.html`. Change all four if your hosting
 `ffmpeg -i yoursong.mp3 -ac 1 -b:a 64k assets/music.mp3`
 
 ## 8. Putting it online (free)
-**GitHub Pages** (your repository `GOCPortfolio/GE2026`): upload every file so that `index.html` is at the top level of the repository. Then **Settings > Pages > Build from branch > main / (root) > Save**. After a minute the site is at `https://gocportfolio.github.io/GE2026/`.
+**GitHub Pages** (your repository `GOCPortfolio/premiumsample`): upload every file so that `index.html` is at the top level of the repository. Then **Settings > Pages > Build from branch > main / (root) > Save**. After a minute the site is at `https://gocportfolio.github.io/premiumsample/`.
 
 **Netlify**: drag the whole `wedding-site` folder onto app.netlify.com/drop.
 **Vercel**: import the repository, framework "Other", no build command.

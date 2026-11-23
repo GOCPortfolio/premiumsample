@@ -14,8 +14,8 @@ var COL_CODE = 7, COL_CHECKED = 8, COL_REMINDED = 9, COL_SEAT = 10;
 
 // Passcodes for the guest desk (admin.html). CHANGE BOTH before you deploy.
 // ADMIN sees the whole dashboard. USHER can only check guests in.
-var ADMIN_KEY = 'CHANGE-ME-ADMIN';
-var USHER_KEY = 'CHANGE-ME-USHER';
+var ADMIN_KEY = 'GOC';
+var USHER_KEY = 'GOC123';
 var CODE_RE = /^GE-[A-HJ-NP-Z2-9]{8}$/;
 
 // Stops spreadsheet formulas such as =HYPERLINK(...) being run from a guest's text.
